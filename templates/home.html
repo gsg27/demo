@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HOME</title>
+</head>
+<body>
+    <form action='' method="POST">
+        {% csrf_token %}
+        {{ f.name.label }}
+        {{ f.name }}
+        <input type="submit" value="save"/> 
+
+    </form>
+    <input type="button" onclick="window.location.href = '/data';" value="Check data"/>
+</body>
+</html>
