@@ -1,0 +1,27 @@
+{% extends 'home.html' %}
+ 
+{% block title%} <title>Create User</title> {% endblock title%}
+
+{% block content %}
+    
+
+		
+				<form class="register-form" method="post">
+                 {% csrf_token %}
+
+                 <div class="register-page">
+    <div class="form">
+
+					{{ form.as_table }}
+					<input class="btn btn-primary" type="submit" value="Register">
+
+
+<p class="message">Already have an Account? <a href="/login">Login Now!</a></p>
+				</form>
+				
+                </div>
+</div>
+
+
+ 
+{% endblock %}

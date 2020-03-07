@@ -1,23 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     {% block title %}<title>HOME</title>{% endblock %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
 </head>
-<style>
-    form {
-  text-align: center;
-  margin-top: 20px
-}
-body {
-  background-color: powderblue;
-}
-#sub {color:rgb(253, 253, 253);
-    text-align: center;
-    }
-    #d1 { display: flex; justify-content: center; }
-   
-</style>
+ 
+        {% block content %}
+        <a id="logout" href="{% url 'logout'%}" class="btn btn-danger btn-sm">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
 <body>
     <form action='' method="POST">
         <div class="form-group">
@@ -30,8 +23,12 @@ body {
     <div id="d1">
     <button type="button" class="btn btn-info btn-lg" style="float:center; margin-top: 50px" onclick="window.location.href = '/data';" >
     <span class="glyphicon glyphicon-ok"> Check DATA</span>
+    
     </button>
 </div>
+   
+
+{% endblock %}
 
 </body>
 </html>
