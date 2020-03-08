@@ -6,9 +6,10 @@
 <a id="logout" href="{% url 'logout'%}" class="btn btn-danger btn-sm">
           <span class="glyphicon glyphicon-log-out"></span> Log out
         </a>
-<body>
     {% for d in data %}
     {{ d }}<br>
 {% endfor %}
 
 {% endblock %}
+
+

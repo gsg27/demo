@@ -3,6 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from .models import detail
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .forms import detail_form
 # Create your views here.
 from django.contrib.auth.decorators import login_required
@@ -13,7 +14,9 @@ def home(request):
     if request.method == 'POST':
         form = detail_form(request.POST)
         if form.is_valid():
-            form.save()
+            temp=form.save(commit=False)
+            temp.user = request.user
+            temp.save()
             return render(request,'home.html',{'f':form})
     else:
         return render(request,'home.html',{'f':form})
@@ -21,6 +24,7 @@ def home(request):
 @login_required(login_url='/login/')
 def name_data(request):
     data = (detail.objects.all())
+    
     
     return render(request,'detail.html',{'data':data})
 
@@ -35,3 +39,22 @@ def register(request):
         f = UserCreationForm()
  
     return render(request, 'register.html', {'form': f})
+
+
+@login_required(login_url='/login/')
+def profile(request):
+    user = request.user
+    if request.method == 'POST':
+        if user.first_name == '':
+            user.first_name = request.POST['first_name']
+        elif user.last_name == '':
+            user.last_name = request.POST['last_name']
+        elif user.email == '':
+            user.email = request.POST['email']
+        user.save()
+        return render(request,'profile.html',{'user':user})
+
+    else:
+        pass
+
+    return render(request,'profile.html',{'user':user})

@@ -1,0 +1,45 @@
+{% extends 'home.html' %}
+{% block title%}    <title>Profile</title>{% endblock title%}
+
+{% block content %}
+<a id="logout" href="{% url 'logout'%}" class="btn btn-danger btn-sm">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+
+<h1> Username: {{ user.username }}</h1>
+
+<form method='POST'>
+ {% csrf_token %}
+
+{% if user.first_name == '' %}
+<input type = "text" name='first_name' placeholder="First Name" />
+<input class="btn btn-success" type="submit" value="submit">
+{% else %}
+<h1> First Name: {{ user.first_name }}</h1>
+{% endif %}
+  </form>
+  
+<form method='POST'>
+{% csrf_token %}
+{% if user.last_name == '' %}
+<input type = "text" name='last_name' placeholder="Last Name" />
+<input class="btn btn-success" type="submit" value="submit">
+{% else %}
+<h1> Last Name: {{ user.last_name }}</h1>
+
+{% endif %}
+  </form>
+ 
+ <form method='POST'>
+ {% csrf_token %}
+{% if user.email == '' %}
+<input type = "text" name='email' placeholder="email" />
+<input class="btn btn-success" type="submit" value="submit">
+{% else %}
+<h1> E-mail: {{ user.email }}</h1>
+{% endif %}
+
+
+</form>
+
+{% endblock %}
