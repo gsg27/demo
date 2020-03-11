@@ -10,23 +10,22 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/login/')
 def home(request):
+    return render(request,'home.html')
+
+@login_required(login_url='/login/')
+def name_data(request):
     form = detail_form()
+    data = (detail.objects.all())
+    argv = {'f':form,'data':data}
     if request.method == 'POST':
         form = detail_form(request.POST)
         if form.is_valid():
             temp=form.save(commit=False)
             temp.user = request.user
             temp.save()
-            return render(request,'home.html',{'f':form})
+            return render(request,'detail.html',argv)
     else:
-        return render(request,'home.html',{'f':form})
-
-@login_required(login_url='/login/')
-def name_data(request):
-    data = (detail.objects.all())
-    
-    
-    return render(request,'detail.html',{'data':data})
+        return render(request,'detail.html',argv)
 
 def register(request):
     if request.method == 'POST':

@@ -6,9 +6,18 @@
 <a id="logout" href="{% url 'logout'%}" class="btn btn-danger btn-sm">
           <span class="glyphicon glyphicon-log-out"></span> Log out
         </a>
-    {% for d in data %}
-    {{ d }}<br>
+        {% for d in data %}
+    {{ d.user.username }}: {{ d }}<br>
 {% endfor %}
+        <form action='' method="POST">
+        <div class="form-group">
+        {% csrf_token %}
+        {{ f.message.label }}
+        {{ f.message }}
+        <input type="submit" class="btn btn-success" value="save" id="sub"/> 
+        </div>
+    </form>
+    
 
 {% endblock %}
 

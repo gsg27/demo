@@ -6,5 +6,5 @@ class detail_form(forms.ModelForm):
     class Meta:
         model = detail
         fields = [
-            'name',
+            'message',
         ]
